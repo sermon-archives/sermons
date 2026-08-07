@@ -1,0 +1,6 @@
+dist/
+var/
+data/sermons.sqlite3
+.env
+__pycache__/
+*.pyc

@@ -1,0 +1,7 @@
+yt-dlp>=2025.3.31
+faster-whisper>=1.1.0
+libsql-client>=0.3.0
+deepmultilingualpunctuation==1.0.1
+transformers>=4.41,<5
+requests>=2.31
+python-dotenv>=1.0

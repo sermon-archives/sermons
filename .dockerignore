@@ -1,0 +1,7 @@
+var/audio
+.git
+.jj
+__pycache__
+dist
+*.sqlite3
+.env

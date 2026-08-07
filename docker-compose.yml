@@ -1,0 +1,37 @@
+services:
+  site:
+    build:
+      context: .
+      dockerfile: Dockerfile.site
+    ports:
+      - "4173:80"
+    restart: unless-stopped
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile.worker
+    env_file:
+      - .env
+    environment:
+      WHISPER_MODEL: ${WHISPER_MODEL:-small.en}
+      WORKER_LIMIT: ${WORKER_LIMIT:-1}
+    volumes:
+      - ./data:/app/data
+      - ./content:/app/content
+      - ./var:/app/var
+    profiles: [worker]
+
+  fetcher:
+    build:
+      context: .
+      dockerfile: Dockerfile.worker
+    env_file:
+      - .env
+    environment:
+      FETCH_INTERVAL: ${FETCH_INTERVAL:-21600}
+    command: ["python", "scripts/fetcher.py", "--interval", "${FETCH_INTERVAL:-21600}"]
+    volumes:
+      - ./data:/app/data
+      - ./content:/app/content
+      - ./var:/app/var
+    profiles: [worker]
