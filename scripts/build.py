@@ -67,7 +67,7 @@ def listish_html(text):
         line=line.strip()
         if not line: continue
         m=re.match(r"^\d+[.)]\s+",line)
-        if m: lines.append(f"<p><strong>{html.escape(line)}</strong></p>")
+        if m: lines.append(f"<p>{html.escape(line)}</p>")
         elif line.startswith(('-', '*')): lines.append(f"<p>· {html.escape(line[1:].strip())}</p>")
         else: lines.append(f"<p>{html.escape(line)}</p>")
     return ''.join(lines)
